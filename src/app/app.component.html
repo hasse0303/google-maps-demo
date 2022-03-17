@@ -1,0 +1,71 @@
+<div class="contain">
+  <!-- <div style="width: 200px; height: 100px; background-color: aqua;">
+
+  </div>
+  <div style="width: 200px; height: 100px; background-color: burlywood;">
+
+  </div> -->
+    <div class="sidenav form-horizontal">
+      <div class="btn-group mode mb-3" role="group" aria-label="Basic outlined example">
+        <button type="button" class="btn btn-outline-primary" (click)="vaiDriving()">Driving</button>
+        <button type="button" class="btn btn-outline-primary" (click)="vaiTransit()">Transit</button>
+        <button type="button" class="btn btn-outline-primary" (click)="vaiWalking()">Waking</button>
+        <button type="button" class="btn btn-outline-primary" (click)="vaiCycling()">Cycling</button>
+      </div>
+      <form [formGroup]="form" class="form-group">
+        <div class="mb-3 row">
+          <label for="from" class="col-sm-2 col-form-label">From</label>
+          <div class="col-sm-10">
+            <input
+            ngx-google-places-autocomplete
+            (onAddressChange)="originAddressChange($event)"
+            formControlName="from"
+            class="form-control"
+            id="from"
+            placeholder="Origin"
+          />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="to" class="col-sm-2 col-form-label">To</label>
+          <div class="col-sm-10">
+          <input
+            ngx-google-places-autocomplete
+            (onAddressChange)="destinationAddressChange($event)"
+            formControlName="to"
+            id="to"
+            class="form-control mb-3"
+            placeholder="Destination"
+          />
+          </div>
+        </div>
+        <button (click)="directPlace()" class="btn btn-info">Direct</button>
+        <!-- <button class="btn btn-primary  mb-3 ">Your Location</button> -->
+      </form>
+
+      <div *ngIf="directionResult$" class="detail">
+        <p> <strong>From:</strong> {{ origin }}</p>
+        <p> <strong>To:</strong> {{ destination }}</p>
+        <p> <strong>Distance:</strong> {{ distance }}</p>
+        <p> <strong>Duration:</strong> {{ duration }}</p>
+      </div>
+    </div>
+  <div class="map">
+    <google-map
+    width="100%"
+    height="100%"
+    [center]="center"
+    [zoom]="zoom"
+    (mapClick)="addMarker($event)"
+  >
+    <map-marker
+      *ngFor="let markerPosition of markerPositions"
+      [position]="markerPosition"
+      [options]="markerOptions"
+    ></map-marker>
+    <map-directions-renderer
+      [directions]="directionResult$"
+    ></map-directions-renderer>
+  </google-map>
+  </div>
+</div>

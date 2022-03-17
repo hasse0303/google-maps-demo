@@ -1,0 +1,26 @@
+.contain{
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 50px);
+}
+.map{
+  width: 100%;
+  height: 100%;
+}
+.sidenav{
+  display: block;
+  width: 380px;
+  padding: 20px;
+}
+.detail > p{
+  margin: 0;
+}
+
+
+@media screen and (max-width: 480px) {
+  .contain{
+    display: flex;
+    flex-direction: column;
+    height:100vh
+  }
+}
